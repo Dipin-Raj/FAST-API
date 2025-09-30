@@ -32,7 +32,7 @@ def run_alembic_command(command: List[str]) -> Dict[str, Any]:
 
         print(f"Running command: {[alembic_executable] + command} in {project_root}")
         process = subprocess.run(
-            [alembic_executable] + command, # Use the explicit alembic executable
+            [alembic_executable, "-c", "Core/alembic.ini"] + command, # Use the explicit alembic executable
             cwd=project_root,
             capture_output=True,
             text=True,
