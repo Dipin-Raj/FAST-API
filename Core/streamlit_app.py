@@ -4,10 +4,7 @@ from datetime import date
 import os
 
 # FastAPI base URL - Read from environment variable for deployment, with a local fallback
-FASTAPI_URL = os.getenv("https://fast-api-o2y7.onrender.com/", "http://localhost:8000")
-
-st.title("🏥 HMS Patient Management")
-
+FASTAPI_URL = os.getenv("FASTAPI_URL", "http://localhost:8000")st.title("🏥 HMS Patient Management")
 # --- Create Patient --- 
 st.header("Add New Patient")
 with st.form("new_patient_form"):
