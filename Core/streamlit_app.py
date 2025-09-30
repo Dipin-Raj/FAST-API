@@ -7,6 +7,7 @@ import os
 FASTAPI_URL = os.getenv("FASTAPI_URL", "http://localhost:8000")
 
 st.title("🏥 HMS Patient Management")
+
 # --- Create Patient --- 
 st.header("Add New Patient")
 with st.form("new_patient_form"):
@@ -131,8 +132,9 @@ if st.button("Fetch Schema"):
         st.error("Could not connect to FastAPI. Make sure it's running at http://localhost:8000")
 
 st.markdown("### Alembic Migrations")
+st.warning("**Advanced Use:** If you get a 'table already exists' error, your database is out of sync. Use 'Stamp Database' to mark all migrations as applied without running them.")
 
-col1, col2, col3 = st.columns(3)
+col1, col2, col3, col4 = st.columns(4)
 
 with col1:
     if st.button("Fetch Alembic History"):
@@ -166,6 +168,18 @@ with col3:
                 st.code(response.json().get("stdout", ""))
             else:
                 st.error(f"Error downgrading database: {response.status_code} - {response.text}")
+        except requests.exceptions.ConnectionError:
+            st.error("Could not connect to FastAPI.")
+            
+with col4:
+    if st.button("Stamp Database (head)"):
+        try:
+            response = requests.post(f"{FASTAPI_URL}/alembic/stamp")
+            if response.status_code == 200:
+                st.success("Database stamped successfully!")
+                st.code(response.json().get("stdout", ""))
+            else:
+                st.error(f"Error stamping database: {response.status_code} - {response.text}")
         except requests.exceptions.ConnectionError:
             st.error("Could not connect to FastAPI.")
 
