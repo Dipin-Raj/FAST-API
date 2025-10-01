@@ -30,7 +30,6 @@ The application supports full CRUD (Create, Read, Update, Delete) functionality 
 ```
 .
 ├── Core/
-│   ├── .env                # Environment variables (DATABASE_URL)
 │   ├── alembic.ini         # Alembic config for Core directory
 │   └── streamlit_app.py    # The main Streamlit frontend application
 ├── alembic/
