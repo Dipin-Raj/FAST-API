@@ -1,10 +1,10 @@
-# HMS Patient Management System
+# 🏥HMS: Patient Management System🏥
 
 This project is a full-stack web application for a Hospital Management System (HMS) designed to manage patient records. It features a robust backend API built with FastAPI and a user-friendly frontend dashboard created with Streamlit.
 
 The application supports full CRUD (Create, Read, Update, Delete) functionality for patient data and includes a complete database migration system powered by Alembic, which can be controlled directly from the Streamlit UI.
 
-## Features
+## 📜Features
 
 - **Patient Management**: Add, view, update, and delete patient records.
 - **API Backend**: A powerful and fast API built with FastAPI.
@@ -12,7 +12,7 @@ The application supports full CRUD (Create, Read, Update, Delete) functionality 
 - **Database Migrations**: Full schema migration support using Alembic, with controls integrated into the frontend for developers.
 - **ORM**: Uses SQLAlchemy for seamless interaction with the PostgreSQL database.
 
-## Technologies Used
+## 🧑‍💻Technologies Used
 
 - **Backend**: Python, FastAPI, Uvicorn
 - **Frontend**: Streamlit
@@ -20,7 +20,7 @@ The application supports full CRUD (Create, Read, Update, Delete) functionality 
 - **ORM & Migrations**: SQLAlchemy, Alembic
 - **Dependencies**: `psycopg2-binary`, `python-dotenv`
 
-## Project Structure
+## 🧩Project Structure
 
 ```
 .
@@ -42,7 +42,7 @@ The application supports full CRUD (Create, Read, Update, Delete) functionality 
 └── requirements.txt        # Python dependencies
 ```
 
-## Setup and Installation (Local)
+## ⬇️Setup and Installation (Local)
 
 Follow these steps to set up and run the project locally for development.
 
@@ -101,13 +101,13 @@ streamlit run Core/streamlit_app.py
 ```
 The frontend application will be available at `http://localhost:8501`.
 
-## How to Use
+## 👾How to Use
 
 1.  **Launch the Application**: Make sure both the FastAPI backend and the Streamlit frontend are running.
 2.  **Initialize the Database**: Open the Streamlit app in your browser. Find the "Database Schema Management" section and click the **"Upgrade Database (head)"** button. This will create the `patients` table in your database.
 3.  **Manage Patients**: Use the forms at the top of the application to add, view, update, and delete patient records.
 
-### For Developers: How to Make Schema Changes
+### 🤖For Developers: How to Make Schema Changes
 
 If you need to modify the database structure (e.g., add a new column):
 
@@ -116,7 +116,7 @@ If you need to modify the database structure (e.g., add a new column):
 3.  **Apply the Migration**: Click the **"Upgrade Database (head)"** button to apply the new column to your database.
 4.  **Update the Frontend**: Modify `Core/streamlit_app.py` to add UI elements (e.g., text boxes) for your new fields.
 
-## Deployment on Render and Neon
+## 📲Deployment on Render and Neon
 
 These instructions explain how to deploy the application using Render for hosting and Neon for the PostgreSQL database.
 
