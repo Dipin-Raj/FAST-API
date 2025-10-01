@@ -1,133 +1,165 @@
-# HMS Patient Management API
+# HMS Patient Management System
 
-This project demonstrates building a simple Healthcare Management System (HMS) Patient API using FastAPI, SQLAlchemy ORM, Alembic for database migrations, and PostgreSQL as the database. It also includes a basic Streamlit UI to interact with the API.
+This project is a full-stack web application for a Hospital Management System (HMS) designed to manage patient records. It features a robust backend API built with FastAPI and a user-friendly frontend dashboard created with Streamlit.
+
+The application supports full CRUD (Create, Read, Update, Delete) functionality for patient data and includes a complete database migration system powered by Alembic, which can be controlled directly from the Streamlit UI.
 
 ## Features
 
--   **FastAPI Backend:** RESTful API for managing patient records.
--   **SQLAlchemy ORM:** Object-Relational Mapping for Python database interactions.
--   **Alembic Migrations:** Database schema version control.
--   **PostgreSQL Database:** Robust and scalable relational database.
--   **Streamlit UI:** Simple web interface for CRUD operations on patient data.
+- **Patient Management**: Add, view, update, and delete patient records.
+- **API Backend**: A powerful and fast API built with FastAPI.
+- **Interactive Frontend**: An easy-to-use dashboard built with Streamlit.
+- **Database Migrations**: Full schema migration support using Alembic, with controls integrated into the frontend for developers.
+- **ORM**: Uses SQLAlchemy for seamless interaction with the PostgreSQL database.
+
+## Technologies Used
+
+- **Backend**: Python, FastAPI, Uvicorn
+- **Frontend**: Streamlit
+- **Database**: PostgreSQL
+- **ORM & Migrations**: SQLAlchemy, Alembic
+- **Dependencies**: `psycopg2-binary`, `python-dotenv`
 
 ## Project Structure
 
 ```
-FAST_API/
+.
+├── Core/
+│   ├── .env                # Environment variables (DATABASE_URL)
+│   ├── alembic.ini         # Alembic config for Core directory
+│   └── streamlit_app.py    # The main Streamlit frontend application
+├── alembic/
+│   ├── versions/           # Directory for migration scripts
+│   └── env.py              # Alembic environment setup
 ├── app/
 │   ├── __init__.py
-│   ├── main.py         # FastAPI application with API endpoints
-│   ├── database.py     # Database connection and session management
-│   ├── models.py       # SQLAlchemy ORM models (Patient table)
-│   └── schemas.py      # Pydantic models for data validation
-├── alembic/
-│   ├── versions/       # Alembic migration scripts
-│   └── env.py          # Alembic environment configuration
-├── alembic.ini         # Alembic configuration file
-├── .env                # Environment variables (e.g., DATABASE_URL)
-├── requirements.txt    # Python dependencies
-├── README.md           # Project documentation
-└── streamlit_app.py    # Streamlit UI to interact with the API
+│   ├── database.py         # Database session management
+│   ├── main.py             # The main FastAPI application
+│   ├── models.py           # SQLAlchemy database models
+│   └── schemas.py          # Pydantic schemas for data validation
+├── .gitignore
+├── alembic.ini             # Main Alembic configuration
+└── requirements.txt        # Python dependencies
 ```
 
-## Setup and Installation
+## Setup and Installation (Local)
 
-### 1. Clone the Repository (if applicable)
+Follow these steps to set up and run the project locally for development.
 
-If you received this project as a repository, clone it:
+### 1. Clone the Repository
 
 ```bash
-git clone <repository_url>
-cd FAST_API
+git clone https://github.com/Dipin-Raj/FAST-API.git
+cd FAST-API
 ```
 
 ### 2. Create and Activate a Virtual Environment
 
-It's recommended to use a virtual environment to manage dependencies.
-
+**On Windows:**
 ```bash
 python -m venv .venv
-# On Windows
 .venv\Scripts\activate
-# On macOS/Linux
+```
+
+**On macOS/Linux:**
+```bash
+python3 -m venv .venv
 source .venv/bin/activate
 ```
 
 ### 3. Install Dependencies
 
-Install the required Python packages:
-
 ```bash
 pip install -r requirements.txt
 ```
 
-### 4. Set up PostgreSQL Database
+### 4. Set Up Environment Variables
 
-Ensure you have a PostgreSQL database server running. If you don't have one, you can:
+Create a file named `.env` inside the `Core` directory (`Core/.env`). Add your PostgreSQL database connection string to it.
 
--   **Install Locally:** Download and install PostgreSQL from [https://www.postgresql.org/download/](https://www.postgresql.org/download/). Remember the password for the `postgres` user.
--   **Use Docker:** Run a PostgreSQL container (e.g., `docker run --name some-postgres -e POSTGRES_PASSWORD=mysecretpassword -p 5432:5432 -d postgres`).
--   **Cloud Provider:** Use a service like ElephantSQL, AWS RDS, etc.
-
-### 5. Configure Environment Variables
-
-Create a `.env` file in the root of the `FAST_API` directory (if it doesn't exist) and add your PostgreSQL connection string. Replace `your_actual_password` with the password you set for your PostgreSQL user.
-
+**`Core/.env` file:**
 ```
-DATABASE_URL="postgresql://postgres:your_actual_password@localhost:5432/postgres"
+DATABASE_URL="postgresql+psycopg2://USER:PASSWORD@HOST:PORT/DATABASE_NAME"
 ```
+Replace `USER`, `PASSWORD`, `HOST`, `PORT`, and `DATABASE_NAME` with your actual local database credentials.
 
-### 6. Apply Database Migrations
+### 5. Run the FastAPI Backend
 
-Apply the Alembic migrations to create the `patients` table and add necessary columns:
-
-```bash
-python -m alembic upgrade head
-```
-
-## Running the Applications
-
-### 1. Run the FastAPI Backend
-
-Navigate to the `FAST_API` directory and run the FastAPI application using Uvicorn:
+Open a terminal and run the following command from the project root:
 
 ```bash
 uvicorn app.main:app --reload
 ```
+The API will be available at `http://localhost:8000`.
 
-The API will be available at `http://localhost:8000`. You can access the interactive API documentation (Swagger UI) at `http://localhost:8000/docs`.
+### 6. Run the Streamlit Frontend
 
-### 2. Run the Streamlit UI
-
-Open a **new terminal** (keep the FastAPI backend running in the first terminal), navigate to the `FAST_API` directory, activate your virtual environment, and run the Streamlit application:
-
-```bash
-streamlit run streamlit_app.py
-```
-
-The Streamlit UI will open in your web browser, typically at `http://localhost:8501`.
-
-## Testing Endpoints
-
--   **FastAPI Docs:** Open `http://localhost:8000/docs` in your browser to interact with the API directly.
--   **Streamlit UI:** Use the forms and buttons in the Streamlit application to perform CRUD operations on patient data.
-
-## Alembic Downgrade (Optional)
-
-To rollback a migration (e.g., to revert the last schema change):
+Open a **second terminal** and run the following command from the project root:
 
 ```bash
-python -m alembic downgrade -1
+streamlit run Core/streamlit_app.py
 ```
+The frontend application will be available at `http://localhost:8501`.
 
-To downgrade to a specific revision:
+## How to Use
 
-```bash
-python -m alembic downgrade <revision_id>
-```
+1.  **Launch the Application**: Make sure both the FastAPI backend and the Streamlit frontend are running.
+2.  **Initialize the Database**: Open the Streamlit app in your browser. Find the "Database Schema Management" section and click the **"Upgrade Database (head)"** button. This will create the `patients` table in your database.
+3.  **Manage Patients**: Use the forms at the top of the application to add, view, update, and delete patient records.
 
-To downgrade all migrations:
+### For Developers: How to Make Schema Changes
 
-```bash
-python -m alembic downgrade base
-```
+If you need to modify the database structure (e.g., add a new column):
+
+1.  **Edit the Model**: Modify the `Patient` class in `app/models.py` to include your changes.
+2.  **Generate Migration Script**: In the Streamlit app, use the "Generate New Migration" form to create a new Alembic migration script.
+3.  **Apply the Migration**: Click the **"Upgrade Database (head)"** button to apply the new column to your database.
+4.  **Update the Frontend**: Modify `Core/streamlit_app.py` to add UI elements (e.g., text boxes) for your new fields.
+
+## Deployment on Render and Neon
+
+These instructions explain how to deploy the application using Render for hosting and Neon for the PostgreSQL database.
+
+### Step 1: Set Up the Database on Neon
+
+1.  Create an account on [Neon](https://neon.tech/).
+2.  Create a new project.
+3.  In your project dashboard, find the **Connection Details** section.
+4.  Select the connection string that starts with `postgresql://`.
+5.  **Important**: You must add `+psycopg2` to the protocol to make it compatible with SQLAlchemy. For example, if your Neon URL is `postgresql://user:pass@host/db`, you will use `postgresql+psycopg2://user:pass@host/db`.
+6.  Keep this full connection string safe. You will need it for the backend deployment.
+
+### Step 2: Deploy the FastAPI Backend on Render
+
+1.  Create an account on [Render](https://render.com/).
+2.  Go to the Dashboard and click **New +** > **Web Service**.
+3.  Connect your GitHub account and select the `FAST-API` repository.
+4.  Configure the service:
+    -   **Name**: `fast-api-backend` (or any name you prefer).
+    -   **Build Command**: `pip install -r requirements.txt`
+    -   **Start Command**: `uvicorn app.main:app --host 0.0.0.0 --port $PORT`
+5.  Go to the **Environment** tab for your new service.
+6.  Add a **Secret File**:
+    -   **Filename**: `Core/.env`
+    -   **Contents**: `DATABASE_URL="YOUR_NEON_DATABASE_URL"` (Paste the full `postgresql+psycopg2` URL from Neon here).
+7.  Click **Create Web Service**.
+
+### Step 3: Deploy the Streamlit Frontend on Render
+
+1.  Click **New +** > **Web Service** again.
+2.  Connect the same GitHub repository (`FAST-API`).
+3.  Configure the service:
+    -   **Name**: `streamlit-frontend` (or any name you prefer).
+    -   **Build Command**: `pip install -r requirements.txt`
+    -   **Start Command**: `streamlit run Core/streamlit_app.py --server.port $PORT --server.address 0.0.0.0`
+4.  Go to the **Environment** tab.
+5.  Add an **Environment Variable**:
+    -   **Key**: `FASTAPI_URL`
+    -   **Value**: The URL of your deployed backend service (e.g., `https://fast-api-backend.onrender.com`). You can find this on the backend service's dashboard page.
+6.  Click **Create Web Service**.
+
+### Step 4: Final Setup
+
+1.  Once both services are deployed, open your Streamlit frontend URL.
+2.  Just like in the local setup, go to the "Database Schema Management" section and click **"Upgrade Database (head)"** to create the tables in your Neon database.
+3.  Your application is now live and ready to use.
