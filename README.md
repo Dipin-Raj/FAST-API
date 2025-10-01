@@ -3,7 +3,7 @@
 You can access a live demo of the deployed application here:
 [**Live Demo**](https://fast-api-by-dipin.streamlit.app/)
 
-**Note:** The application is deployed on Render's free tier. The first visit may take up to 50 seconds for the services to spin up from sleep. If the app is asleep due to inactivity, simply click the button to wake it.
+**‼️Note:** The application is deployed on Render's free tier. The first visit may take up to 50 seconds for the services to spin up from sleep. If the app is asleep due to inactivity, simply click the button to wake it.
 
 This project is a full-stack web application for a Hospital Management System (HMS) designed to manage patient records. It features a robust backend API built with FastAPI and a user-friendly frontend dashboard created with Streamlit.
 
