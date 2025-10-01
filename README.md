@@ -1,13 +1,13 @@
 # 🏥HMS: Patient Management System🏥
 
-You can access a live demo of the deployed application here:
-[**Live Demo**](https://fast-api-by-dipin.streamlit.app/)
-
-**‼️Note:** The application is deployed on Render's free tier. The first visit may take up to 50 seconds for the services to spin up from sleep. If the app is asleep due to inactivity, simply click the button to wake it.
-
 This project is a full-stack web application for a Hospital Management System (HMS) designed to manage patient records. It features a robust backend API built with FastAPI and a user-friendly frontend dashboard created with Streamlit.
 
 The application supports full CRUD (Create, Read, Update, Delete) functionality for patient data and includes a complete database migration system powered by Alembic, which can be controlled directly from the Streamlit UI.
+
+You can access a live demo of the deployed application here:
+[**Live Demo**](https://fast-api-by-dipin.streamlit.app/)
+
+**📌Note:** The application is deployed on Render's free tier. The first visit may take up to 50 seconds for the services to spin up from sleep. If the app is asleep due to inactivity, simply click the button to wake it.
 
 ## 📜Features
 
