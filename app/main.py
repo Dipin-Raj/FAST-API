@@ -3,8 +3,8 @@ from sqlalchemy.orm import Session
 from typing import List, Dict, Any
 import subprocess
 import os
-import sys # Added import
-from sqlalchemy import inspect, create_engine # Added import
+import sys 
+from sqlalchemy import inspect, create_engine 
 from sqlalchemy.exc import OperationalError
 
 from . import models, schemas
@@ -14,10 +14,9 @@ models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI(title="HMS Patient API")
 
-# Helper function to run Alembic commands
+# Helper function
 def run_alembic_command(command: List[str]) -> Dict[str, Any]:
     try:
-        # Determine the virtual environment's bin/Scripts directory
         python_executable = sys.executable
         venv_dir = os.path.dirname(python_executable)
         
@@ -26,13 +25,12 @@ def run_alembic_command(command: List[str]) -> Dict[str, Any]:
         else:
             alembic_executable = os.path.join(venv_dir, "alembic")
 
-        # Ensure the command is run from the project root where alembic.ini is located
         project_root = os.path.dirname(os.path.abspath(__file__))
-        project_root = os.path.dirname(project_root) # Go up one level from 'app' to 'FAST_API'
+        project_root = os.path.dirname(project_root) # app to FAST_API
 
         print(f"Running command: {[alembic_executable] + command} in {project_root}")
         process = subprocess.run(
-              [alembic_executable, "-c", "Core/alembic.ini"] + command, # Use the explicit alembic executable
+              [alembic_executable, "-c", "Core/alembic.ini"] + command, 
               cwd=project_root,
               capture_output=True,
               text=True,
@@ -126,7 +124,7 @@ def delete_patient(patient_id: int, db: Session = Depends(get_db)):
     db.commit()
     return {"message": "Patient deleted successfully"}
 
-# --- Alembic Management Endpoints ---
+# Alembic endpoints
 
 @app.get("/alembic/history", tags=["Alembic"]) 
 def get_alembic_history():
