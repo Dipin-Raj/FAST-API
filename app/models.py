@@ -7,7 +7,6 @@ class Patient(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String, nullable=False)
-    middle_name = Column(String, nullable=True) # ADD THIS LINE
     email = Column(String, unique=True, index=True, nullable=False)
     date_of_birth = Column(Date, nullable=False)
     phone_number = Column(String, nullable=True)
