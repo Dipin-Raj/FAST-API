@@ -3,12 +3,12 @@ import requests
 from datetime import date
 import os
 
-# FastAPI base URL - Read from environment variable for deployment, with a local fallback
+# FastAPI base URL
 FASTAPI_URL = os.getenv("FASTAPI_URL", "http://localhost:8000")
 
 st.title("🏥 HMS Patient Management")
 
-# --- Create Patient --- 
+# Create Patient
 st.header("Add New Patient")
 with st.form("new_patient_form"):
     name = st.text_input("Name")
@@ -38,7 +38,7 @@ with st.form("new_patient_form"):
 
 st.markdown("---")
 
-# --- View Patients --- 
+# View Patients 
 st.header("View All Patients")
 if st.button("Refresh Patients List"):
     try:
@@ -56,7 +56,7 @@ if st.button("Refresh Patients List"):
 
 st.markdown("---")
 
-# --- Update Patient --- 
+# Update Patient
 st.header("Update Patient")
 with st.form("update_patient_form"):
     update_id = st.number_input("Patient ID to Update", min_value=1, step=1)
@@ -92,7 +92,7 @@ with st.form("update_patient_form"):
 
 st.markdown("---")
 
-# --- Delete Patient --- 
+# Delete Patient
 st.header("Delete Patient")
 with st.form("delete_patient_form"):
     delete_id = st.number_input("Patient ID to Delete", min_value=1, step=1)
@@ -112,7 +112,7 @@ with st.form("delete_patient_form"):
 
 st.markdown("---")
 
-# --- Database Schema Management ---
+# Database Schema Management
 st.header("🗄️ Database Schema Management")
 
 # Display Current Schema
